@@ -82,3 +82,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '<email>'
+"""
+- for setting password in gmail
+- go to 'manage your google account' -> 'security'
+- first make sure you on 2-step verification then
+- go to apps password -> verify your account -> select app[custom name] -> Generate
+- you the generated password in the below form
+"""
+EMAIL_HOST_PASSWORD = '<your password>'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = '<default email>'
