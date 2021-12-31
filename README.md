@@ -9,16 +9,4 @@ We will use Django + celery + RabbitMQ
 7. http://localhost:15672/
 8. use test for username and password
 =======================================================================
-- rabbitmq-server (to run rabbitmq)
-- celery -A CeleryDjango worker -l info
-- --- you will see the app, transport, tasks, ..... ---
-- rabbitmqctl shutdown (to shutdown rabbitmqctl)
-- celery -A CeleryDjango worker -l info
-- --- you will find errors ---
-- rabbitmq-server (start it again)
-- Python manage.py shell
-- From demo.tasks import add
-- add.delay(3,3)
-- check the result in (celery -A CeleryDjango worker -l info)
-- add.apply_async((3,2), countdown=5) (to delay it)
-- check the result in (celery -A CeleryDjango worker -l info)
+- when user fill the form and click send, automatic django will send automatic response and later celery will send the email
