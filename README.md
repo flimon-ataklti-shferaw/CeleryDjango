@@ -1,19 +1,24 @@
 #CeleryDjango 
 We will use Django + celery + RabbitMQ 
 1. pip install -r requirement.txt
-2. Follow (https://www.rabbitmq.com/download.html) 
-3. brew install rabbitmq (FOR MAC), [for Windows follow https://www.rabbitmq.com/download.html]
-4. brew install python-tk@3.9; (FOR MAC)
-5. export PATH=$PATH:/usr/local/opt/rabbitmq/sbin
-6. rabbitmqctl status
-7. rabbitmqctl add_user test test
-8. rabbitmqctl set_user_tags test administrator
-9. rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
-10. http://localhost:15672/
-11. use test for username and password
-
-
-
-Django Documenattion - (https://docs.djangoproject.com/en/3.2/)
-Celery documentation - (https://docs.celeryproject.org/en/stable/getting-started/introduction.html)
-Rabbitmq documentation - (https://www.rabbitmq.com/documentation.html)
+2. Download rabbitmq using (https://www.rabbitmq.com/download.html)
+3. rabbitmqctl status
+4. rabbitmqctl add_user test test
+5. rabbitmqctl set_user_tags test administrator
+6. rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
+7. http://localhost:15672/
+8. use test for username and password
+=======================================================================
+rabbitmq-server (to run rabbitmq)
+celery -A CeleryDjango worker -l info
+--- you will see the app, transport, tasks, ..... ---
+rabbitmqctl shutdown (to shutdown rabbitmqctl)
+celery -A CeleryDjango worker -l info
+--- you will find errors ---
+rabbitmq-server (start it again)
+Python manage.py shell
+From demo.tasks import add
+add.delay(3,3)
+check the result in (celery -A CeleryDjango worker -l info)
+add.apply_async((3,2), countdown=5) (to delay it)
+check the result in (celery -A CeleryDjango worker -l info)
