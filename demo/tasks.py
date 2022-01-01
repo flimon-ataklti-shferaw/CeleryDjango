@@ -1,12 +1,32 @@
-from celery.decorators import task
-from celery.utils.log import get_task_logger
+from __future__ import absolute_import, unicode_literals
+import random
+from celery import shared_task
 
-from .email import send_review_email
+from .models import Demo
 
-logger = get_task_logger(__name__)
+@shared_task(name="sum_two_numbers")
+def add(x, y):
+    return x + y
 
 
-@task(name="send_review_email_task")
-def send_review_email_task(name, email, review):
-    logger.info("Sent review email")
-    return send_review_email(name, email, review)
+@shared_task(name="multiply_two_numbers")
+def mul(x, y):
+    number1 = x
+    number2 = (y * random.randint(3, 100))
+    total = number1 * number2
+    new_obj = Demo.objects.create(
+        name='some item',
+        number1=number1,
+        number2=number2,
+        total=total
+    )
+    return total
+
+
+@shared_task(name="sum_list_numbers")
+def xsum(numbers):
+    return sum(numbers)
+
+@shared_task()
+def xsum2(numbers):
+    return sum(numbers)

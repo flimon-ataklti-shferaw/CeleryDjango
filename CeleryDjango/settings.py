@@ -13,7 +13,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'demo'
+    # 3rd party
+    # for scheduled tasks to work
+    'django_celery_beat',
+    'django_celery_results',
+    # my apps
+    'demo',
 ]
 
 MIDDLEWARE = [
@@ -97,3 +102,5 @@ EMAIL_HOST_PASSWORD = '<your password>'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = '<default email>'
+
+broker_url = 'amqp://test:test@localhost:5672/test'
